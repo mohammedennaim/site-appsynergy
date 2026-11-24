@@ -2,7 +2,7 @@ import { ContactInfo, Skill, Experience, Project, VisionPrinciple } from '../typ
 
 export const contactInfo: ContactInfo = {
   email: 'contact@appsynergy.ma',
-  phone: '+212 772 113 206',
+  phone: '+212 772 113 806',
   location: { fr: 'Maroc', en: 'Morocco' },
   linkedin: 'https://www.linkedin.com/company/appsynergy',
   facebook: 'https://www.facebook.com/appsynergy',
