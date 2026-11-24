@@ -26,16 +26,16 @@ const BackToTop: FC = () => {
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.92 }}
-          className="fixed bottom-6 right-6 z-50 grid place-items-center w-12 h-12 rounded-full bg-[#0d0f12]/95 border border-bw-border text-bw-text-primary hover:text-accent hover:border-accent/50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="fixed bottom-6 right-6 z-50 grid place-items-center w-12 h-12 rounded-full border border-[#d7c8b9] bg-[#fffbf6]/95 text-[var(--agency-ink)] shadow-[0_12px_28px_-18px_rgba(55,40,28,0.55)] backdrop-blur-md transition-colors hover:border-[#b8734d]/55 hover:text-[#88482e] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#88482e] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--agency-paper)]"
         >
           <svg className="absolute inset-0 -rotate-90" viewBox="0 0 48 48" aria-hidden="true">
-            <circle cx="24" cy="24" r="22" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="2" />
+            <circle cx="24" cy="24" r="22" fill="none" stroke="rgba(136,72,46,0.12)" strokeWidth="2" />
             <motion.circle
               cx="24"
               cy="24"
               r="22"
               fill="none"
-              stroke="#D5BE91"
+              stroke="#b8734d"
               strokeWidth="2"
               strokeLinecap="round"
               style={{ pathLength: scrollYProgress }}

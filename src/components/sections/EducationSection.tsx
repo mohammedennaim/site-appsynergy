@@ -1,7 +1,7 @@
 import { FC, useCallback, useRef, useState } from 'react';
 import { AnimatePresence, motion, useTransform, type MotionValue } from 'framer-motion';
 import { ArrowLeft, ArrowRight, HeartHandshake, Layers, SlidersHorizontal, type LucideIcon } from 'lucide-react';
-import { education } from '../../data/portfolio';
+import { visionPrinciples } from '../../data/portfolio';
 import { useScrollSteps } from '../../hooks/useScrollReveal';
 import { useI18n, type I18n } from '../../i18n/context';
 import { EducationBackdrop } from '../ui/SectionBackdrops';
@@ -23,11 +23,11 @@ const stageIcons = [SlidersHorizontal, Layers, HeartHandshake];
 const pad = (n: number) => String(n).padStart(2, '0');
 
 const buildStages = ({ pick, t }: I18n): Stage[] =>
-  education.map((edu, index) => ({
+  visionPrinciples.map((edu, index) => ({
     key: `${edu.institution}-${edu.period}`,
-    searchId: `education-${edu.institution}-${edu.period}`,
+    searchId: `vision-${edu.institution}-${edu.period}`,
     year: edu.period.match(/\d{4}/)?.[0] ?? edu.period,
-    chapter: t.education.chapters[index] ?? '',
+    chapter: t.vision.chapters[index] ?? '',
     title: pick(edu.degree),
     school: edu.institution,
     period: edu.period,
@@ -42,7 +42,7 @@ const EducationSection: FC = () => {
   const french = lang === 'fr';
 
   return (
-    <section id="formation" className="agency-vision" aria-labelledby="vision-title">
+    <section id="vision" className="agency-vision" aria-labelledby="vision-title">
       <EducationBackdrop />
       <header className="vision-header">
         <div className="agency-location vision-brand">
@@ -59,9 +59,9 @@ const EducationSection: FC = () => {
 
         <div className="vision-header-copy">
           <h2 id="vision-title">
-            {t.education.title} <em>{t.education.accent}</em>
+            {t.vision.title} <em>{t.vision.accent}</em>
           </h2>
-          <p>{t.education.description}</p>
+          <p>{t.vision.description}</p>
         </div>
       </header>
 
@@ -118,14 +118,14 @@ const TimelineSlider: FC<{ stages: Stage[] }> = ({ stages }) => {
 
       <div className="vision-nav">
         <NeighbourButton
-          label={t.education.previous}
+          label={t.vision.previous}
           year={previous?.year}
           onClick={() => previous && go(active - 1)}
           side="left"
         />
         <TimelineAxis stages={stages} active={active} position={position} onSelect={go} />
         <NeighbourButton
-          label={t.education.next}
+          label={t.vision.next}
           year={next?.year}
           onClick={() => next && go(active + 1)}
           side="right"
@@ -157,8 +157,8 @@ const StageSlide: FC<{ stage: Stage; index: number; total: number }> = ({ stage,
       {stage.description && <p className="vision-text">{stage.description}</p>}
 
       <div className="vision-pills">
-        <span className="vision-pill">{t.education.today}</span>
-        <span className="vision-pill vision-pill-accent">{t.education.status.done}</span>
+        <span className="vision-pill">{t.vision.today}</span>
+        <span className="vision-pill vision-pill-accent">{t.vision.status.done}</span>
       </div>
     </article>
   );

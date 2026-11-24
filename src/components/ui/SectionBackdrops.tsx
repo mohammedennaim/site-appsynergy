@@ -504,7 +504,27 @@ export const AnatomyBackdrop: FC = () => {
 /* Contact — radiating signal                                          */
 /* ------------------------------------------------------------------ */
 
-const SIGNAL_RINGS = [110, 200, 300, 420, 560];
+const SIGNAL_RINGS = [110, 200, 300, 420, 560] as const;
+
+const SignalRing: FC<{
+  progress: MotionValue<number>;
+  radius: number;
+  index: number;
+}> = ({ progress, radius, index }) => {
+  const pathLength = useTransform(progress, [0.06 + index * 0.07, 0.4 + index * 0.07], [0, 1]);
+
+  return (
+    <motion.circle
+      r={radius}
+      fill="none"
+      stroke={`rgba(${COPPER}, ${0.3 - index * 0.035})`}
+      strokeWidth={index === 0 ? 1.4 : 1}
+      strokeDasharray={index % 2 ? '6 10' : undefined}
+      vectorEffect="non-scaling-stroke"
+      style={{ pathLength }}
+    />
+  );
+};
 
 export const ContactBackdrop: FC = () => {
   const progress = useBackdropProgress();
@@ -525,21 +545,9 @@ export const ContactBackdrop: FC = () => {
         style={{ scale }}
         className="absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 w-[min(125vw,1180px)] aspect-square"
       >
-        {SIGNAL_RINGS.map((radius, index) => {
-          const pathLength = useTransform(progress, [0.06 + index * 0.07, 0.4 + index * 0.07], [0, 1]);
-          return (
-            <motion.circle
-              key={radius}
-              r={radius}
-              fill="none"
-              stroke={`rgba(${COPPER}, ${0.3 - index * 0.035})`}
-              strokeWidth={index === 0 ? 1.4 : 1}
-              strokeDasharray={index % 2 ? '6 10' : undefined}
-              vectorEffect="non-scaling-stroke"
-              style={{ pathLength }}
-            />
-          );
-        })}
+        {SIGNAL_RINGS.map((radius, index) => (
+          <SignalRing key={radius} progress={progress} radius={radius} index={index} />
+        ))}
         {[0, 45, 90, 135].map((deg) => {
           const rad = (deg * Math.PI) / 180;
           return (

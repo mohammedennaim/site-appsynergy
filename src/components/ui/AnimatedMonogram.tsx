@@ -35,8 +35,8 @@ const AnimatedMonogram: FC<AnimatedMonogramProps> = ({ className = '' }) => {
     >
       <defs>
         <linearGradient id={guide} x1="0" y1="0" x2="1" y2="1">
-          <stop stopColor="#2bd44f" stopOpacity=".85" />
-          <stop offset="1" stopColor="#422047" stopOpacity=".45" />
+          <stop stopColor="#b8734d" stopOpacity=".85" />
+          <stop offset="1" stopColor="#88482e" stopOpacity=".45" />
         </linearGradient>
         <linearGradient id={shine} x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#FFFFFF" stopOpacity="0" />
@@ -67,7 +67,7 @@ const AnimatedMonogram: FC<AnimatedMonogramProps> = ({ className = '' }) => {
           cx="56"
           cy="56"
           fill="none"
-          stroke="#2bd44f"
+          stroke="#b8734d"
           strokeWidth=".8"
           initial={{ r: 16, opacity: 0 }}
           animate={{ r: [16, 32, 46], opacity: [0, 0.42, 0] }}
@@ -85,8 +85,8 @@ const AnimatedMonogram: FC<AnimatedMonogramProps> = ({ className = '' }) => {
               opacity: { duration: 0.14, delay: 0.06 },
             }}
           >
-            <circle cx="0" cy="-47" r="1.55" fill="#2bd44f" />
-            <circle cx="0" cy="47" r=".8" fill="#E91E63" opacity=".82" />
+            <circle cx="0" cy="-47" r="1.55" fill="#b8734d" />
+            <circle cx="0" cy="47" r=".8" fill="#cda06f" opacity=".82" />
           </motion.g>
         </g>
       )}
@@ -113,7 +113,7 @@ const AnimatedMonogram: FC<AnimatedMonogramProps> = ({ className = '' }) => {
             cx="28"
             cy="78"
             r="1.1"
-            fill="#2bd44f"
+            fill="#b8734d"
             initial={{ opacity: 0, x: -5, y: 9, scale: 0.2 }}
             animate={{ opacity: [0, 1, 0], x: [-5, 6, 18], y: [9, -2, -19], scale: [0.2, 1.5, 0] }}
             transition={{ duration: 0.48, delay: 0.12, ease: EASE_OUT }}
@@ -122,7 +122,7 @@ const AnimatedMonogram: FC<AnimatedMonogramProps> = ({ className = '' }) => {
             cx="84"
             cy="74"
             r="1"
-            fill="#422047"
+            fill="#88482e"
             initial={{ opacity: 0, x: 7, y: 8, scale: 0.2 }}
             animate={{ opacity: [0, 1, 0], x: [7, -5, -22], y: [8, -3, -17], scale: [0.2, 1.4, 0] }}
             transition={{ duration: 0.5, delay: 0.26, ease: EASE_OUT }}

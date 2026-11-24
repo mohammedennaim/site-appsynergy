@@ -13,11 +13,14 @@ import { ProjectsBackdrop } from '../ui/SectionBackdrops';
 type Project = (typeof projects)[number];
 
 const colorMap: Record<string, string> = {
-  emerald: '#2F9E6B',
-  blue: '#3B82F6',
-  violet: '#8B5CF6',
-  rose: '#F43F5E',
-  purple: '#A855F7',
+  copper: '#88482e',
+  warm: '#b8734d',
+  ink: '#5c534b',
+  emerald: '#88482e',
+  blue: '#b8734d',
+  violet: '#995733',
+  rose: '#cda06f',
+  purple: '#5c534b',
 };
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -341,7 +344,7 @@ const ProjectRow: FC<{
       >
         <img
           src={project.screens?.[0] ?? project.image}
-          alt=""
+          alt={title}
           loading="lazy"
           decoding="async"
           draggable={false}

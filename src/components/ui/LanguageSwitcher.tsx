@@ -20,7 +20,7 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ vertical = false, id, cla
       className={
         vertical
           ? `flex flex-col items-center ${className}`
-          : `relative inline-flex p-1 rounded-xl border border-bw-border bg-white/[0.04] ${className}`
+          : `relative inline-flex p-1 rounded-xl border border-[#d7c8b9] bg-[#fffbf6] ${className}`
       }
     >
       {LANGS.map((code) => {
@@ -38,7 +38,7 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ vertical = false, id, cla
                 ? `relative flex items-center justify-center w-14 h-7 text-[11px] font-bold uppercase tracking-[0.2em] pl-[0.2em]
                   transition-colors duration-300 ${active ? 'text-[var(--agency-ink)]' : 'text-[var(--sidebar-muted)] hover:text-[var(--sidebar-accent)]'}`
                 : `relative grid place-items-center w-9 h-8 rounded-lg text-[11px] font-bold uppercase tracking-wider
-                  transition-colors duration-300 ${active ? 'text-bw-text-inverted' : 'text-bw-text-tertiary hover:text-bw-text-primary'}`
+                  transition-colors duration-300 ${active ? 'text-white' : 'text-[#7a6f64] hover:text-[var(--agency-ink)]'}`
             }
           >
             {active && (
@@ -48,7 +48,7 @@ const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ vertical = false, id, cla
                 className={
                   vertical
                     ? 'absolute left-1.5 inset-y-0 my-auto w-1 h-1 rounded-full bg-[var(--sidebar-accent)]'
-                    : 'absolute inset-0 rounded-lg bg-accent shadow-lg shadow-accent/30'
+                    : 'absolute inset-0 rounded-lg bg-[#88482e]'
                 }
               />
             )}

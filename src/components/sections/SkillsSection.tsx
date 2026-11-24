@@ -50,7 +50,7 @@ export default function SkillsSection() {
   };
 
   return (
-    <section id="competences" className="agency-skills" aria-labelledby="skills-title">
+    <section id="expertises" className="agency-skills" aria-labelledby="skills-title">
       <SkillsBackdrop />
       <header className="expertise-header">
         <div className="agency-location expertise-brand">
@@ -126,9 +126,14 @@ export default function SkillsSection() {
                     <span>{t.skills.count(category.items.length)}</span>
                   </div>
                   <ul className="expertise-tags">
-                    {category.items.map((item) => (
-                      <li key={item}><TechBadge name={item} iconClassName="w-4 h-4" /></li>
-                    ))}
+                    {category.items.map((item) => {
+                      const label = pick(item);
+                      return (
+                        <li key={label}>
+                          <TechBadge name={label} iconClassName="w-4 h-4" />
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               </div>

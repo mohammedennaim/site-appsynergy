@@ -157,7 +157,7 @@ const Part: FC<PartProps> = ({
         >
           <img
             src={src}
-            alt=""
+            alt={`${label.name} — ${label.tech}`}
             loading="lazy"
             decoding="async"
             draggable={false}

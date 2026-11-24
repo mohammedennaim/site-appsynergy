@@ -19,7 +19,7 @@ export interface Skill {
   description: Localized;
   /** Short outcomes shown in the expanded panel */
   highlights: Localized[];
-  items: string[];
+  items: Localized[];
   color: string;
 }
 
@@ -30,11 +30,8 @@ export interface Experience {
   location: string;
   description: Localized;
   color: string;
-  type: 'Stage' | 'CDI' | 'CDD' | 'Freelance';
-  /** Position still running: highlighted in the hero, the timeline and the education pipeline */
-  current?: boolean;
   tasks?: Localized<string[]>;
-  technologies?: string[];
+  technologies?: Localized[];
   skills?: Localized<string[]>;
 }
 
@@ -58,7 +55,7 @@ export interface Project {
   details?: Localized<string[]>;
 }
 
-export interface Education {
+export interface VisionPrinciple {
   institution: string;
   degree: Localized;
   period: string;

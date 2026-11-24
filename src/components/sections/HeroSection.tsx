@@ -155,12 +155,12 @@ function ServiceLink({ service, index, french, progress, enabled }: ServiceLinkP
     <motion.a
       variants={revealItem}
       style={enabled ? { y, opacity } : undefined}
-      href="#competences"
+      href="#expertises"
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 380, damping: 28 }}
       onClick={(event) => {
         event.preventDefault();
-        scrollToTarget('#competences');
+        scrollToTarget('#expertises');
       }}
     >
       <motion.span

@@ -147,11 +147,14 @@ export default function StagesSection() {
 
                 {(step.technologies?.length || skills.length > 0) && (
                   <div className="method-tags">
-                    {step.technologies?.map((tech) => (
-                      <span key={tech} className="method-tag">
-                        <TechBadge name={tech} iconClassName="w-3.5 h-3.5" />
-                      </span>
-                    ))}
+                    {step.technologies?.map((tech) => {
+                      const label = pick(tech);
+                      return (
+                        <span key={label} className="method-tag">
+                          <TechBadge name={label} iconClassName="w-3.5 h-3.5" />
+                        </span>
+                      );
+                    })}
                     {skills.map((skill) => (
                       <span key={skill} className="method-tag method-tag-soft">{skill}</span>
                     ))}

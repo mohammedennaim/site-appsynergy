@@ -1,4 +1,4 @@
-import { ContactInfo, Skill, Experience, Project, Education } from '../types';
+import { ContactInfo, Skill, Experience, Project, VisionPrinciple } from '../types';
 
 export const contactInfo: ContactInfo = {
   email: 'contact@appsynergy.ma',
@@ -24,8 +24,15 @@ export const skills: Skill[] = [
       { fr: 'Interfaces rapides, accessibles et responsives', en: 'Fast, accessible and responsive interfaces' },
       { fr: 'Intégration API et outils métiers existants', en: 'Integration with APIs and existing business tools' },
     ],
-    items: ['Sites professionnels', 'Applications web', 'API & outils métiers', 'React', 'Angular', 'Next.js'],
-    color: 'blue',
+    items: [
+      { fr: 'Sites professionnels', en: 'Professional websites' },
+      { fr: 'Applications web', en: 'Web applications' },
+      { fr: 'API & outils métiers', en: 'APIs & business tools' },
+      { fr: 'React', en: 'React' },
+      { fr: 'Angular', en: 'Angular' },
+      { fr: 'Next.js', en: 'Next.js' },
+    ],
+    color: 'copper',
   },
   {
     id: 'mobile',
@@ -39,8 +46,14 @@ export const skills: Skill[] = [
       { fr: 'Publication App Store et Play Store', en: 'App Store and Play Store publishing' },
       { fr: 'Synchronisation et notifications temps réel', en: 'Realtime sync and push notifications' },
     ],
-    items: ['Android & iOS', 'Multiplateforme', 'UX mobile', 'Flutter', 'Firebase'],
-    color: 'green',
+    items: [
+      { fr: 'Android & iOS', en: 'Android & iOS' },
+      { fr: 'Multiplateforme', en: 'Cross-platform' },
+      { fr: 'UX mobile', en: 'Mobile UX' },
+      { fr: 'Flutter', en: 'Flutter' },
+      { fr: 'Firebase', en: 'Firebase' },
+    ],
+    color: 'warm',
   },
   {
     id: 'transformation',
@@ -54,8 +67,13 @@ export const skills: Skill[] = [
       { fr: 'Automatisation des tâches à faible valeur', en: 'Automation of low-value tasks' },
       { fr: 'Outils de gestion adaptés à vos équipes', en: 'Management tools tailored to your teams' },
     ],
-    items: ['Automatisation', 'Logiciels de gestion', 'Workflows', 'Cloud'],
-    color: 'purple',
+    items: [
+      { fr: 'Automatisation', en: 'Automation' },
+      { fr: 'Logiciels de gestion', en: 'Management software' },
+      { fr: 'Workflows', en: 'Workflows' },
+      { fr: 'Cloud', en: 'Cloud' },
+    ],
+    color: 'ink',
   },
   {
     id: 'marketing',
@@ -69,8 +87,13 @@ export const skills: Skill[] = [
       { fr: 'Visibilité organique et campagnes ciblées', en: 'Organic visibility and targeted campaigns' },
       { fr: 'Suivi des performances et itérations', en: 'Performance tracking and iteration' },
     ],
-    items: ['Stratégie & contenus', 'SEO', 'Publicité digitale', 'Réseaux sociaux'],
-    color: 'blue',
+    items: [
+      { fr: 'Stratégie & contenus', en: 'Strategy & content' },
+      { fr: 'SEO', en: 'SEO' },
+      { fr: 'Publicité digitale', en: 'Digital ads' },
+      { fr: 'Réseaux sociaux', en: 'Social media' },
+    ],
+    color: 'copper',
   },
   {
     id: 'ecommerce',
@@ -84,8 +107,13 @@ export const skills: Skill[] = [
       { fr: 'Gestion stocks, commandes et livraisons', en: 'Stock, order and delivery management' },
       { fr: 'Expérience mobile-first pour convertir', en: 'Mobile-first experience built to convert' },
     ],
-    items: ['Boutiques en ligne', 'Paiement', 'Stocks & commandes', 'Logistique'],
-    color: 'green',
+    items: [
+      { fr: 'Boutiques en ligne', en: 'Online stores' },
+      { fr: 'Paiement', en: 'Payments' },
+      { fr: 'Stocks & commandes', en: 'Stock & orders' },
+      { fr: 'Logistique', en: 'Logistics' },
+    ],
+    color: 'warm',
   },
   {
     id: 'method',
@@ -99,8 +127,13 @@ export const skills: Skill[] = [
       { fr: 'Livraisons itératives et feedback continu', en: 'Iterative deliveries and continuous feedback' },
       { fr: 'Accompagnement après la mise en ligne', en: 'Support after launch' },
     ],
-    items: ['Cadrage', 'Design', 'Développement', 'Évolution'],
-    color: 'purple',
+    items: [
+      { fr: 'Cadrage', en: 'Scoping' },
+      { fr: 'Design', en: 'Design' },
+      { fr: 'Développement', en: 'Development' },
+      { fr: 'Évolution', en: 'Evolution' },
+    ],
+    color: 'ink',
   },
 ];
 
@@ -115,8 +148,6 @@ export const experiences: Experience[] = [
       en: 'We clarify your goals, constraints and user expectations before proposing a solution.',
     },
     color: 'emerald',
-    type: 'Freelance',
-    current: true,
     tasks: {
       fr: [
         'Ateliers de cadrage et définition du périmètre',
@@ -129,7 +160,11 @@ export const experiences: Experience[] = [
         'Technical and budget recommendations',
       ],
     },
-    technologies: ['Ateliers', 'UX research', 'Stratégie digitale'],
+    technologies: [
+      { fr: 'Ateliers', en: 'Workshops' },
+      { fr: 'UX research', en: 'UX research' },
+      { fr: 'Stratégie digitale', en: 'Digital strategy' },
+    ],
     skills: {
       fr: ['Écoute', 'Cadrage', 'Conseil'],
       en: ['Listening', 'Scoping', 'Consulting'],
@@ -145,7 +180,6 @@ export const experiences: Experience[] = [
       en: 'Architecture, ergonomics and visual identity: design choices aligned with real usage.',
     },
     color: 'blue',
-    type: 'Freelance',
     tasks: {
       fr: [
         'Maquettes et parcours utilisateur',
@@ -158,7 +192,11 @@ export const experiences: Experience[] = [
         'Prototyping and validation',
       ],
     },
-    technologies: ['Figma', 'UI/UX', 'Design system'],
+    technologies: [
+      { fr: 'Figma', en: 'Figma' },
+      { fr: 'UI/UX', en: 'UI/UX' },
+      { fr: 'Design system', en: 'Design system' },
+    ],
     skills: {
       fr: ['Design', 'UX', 'Identité'],
       en: ['Design', 'UX', 'Brand'],
@@ -174,7 +212,6 @@ export const experiences: Experience[] = [
       en: 'Performance, security and technical quality at the heart of every delivery.',
     },
     color: 'purple',
-    type: 'Freelance',
     tasks: {
       fr: [
         'Développement web et mobile',
@@ -187,7 +224,12 @@ export const experiences: Experience[] = [
         'Testing, deployment and monitoring',
       ],
     },
-    technologies: ['Flutter', 'React', 'Spring Boot', 'Docker'],
+    technologies: [
+      { fr: 'Flutter', en: 'Flutter' },
+      { fr: 'React', en: 'React' },
+      { fr: 'Spring Boot', en: 'Spring Boot' },
+      { fr: 'Docker', en: 'Docker' },
+    ],
     skills: {
       fr: ['Qualité', 'Sécurité', 'Performance'],
       en: ['Quality', 'Security', 'Performance'],
@@ -203,7 +245,6 @@ export const experiences: Experience[] = [
       en: 'Projects designed to adapt to new needs and ambitions over time.',
     },
     color: 'emerald',
-    type: 'Freelance',
     tasks: {
       fr: [
         'Maintenance et évolutions fonctionnelles',
@@ -216,7 +257,11 @@ export const experiences: Experience[] = [
         'Long-term support',
       ],
     },
-    technologies: ['Analytics', 'SEO', 'CI/CD'],
+    technologies: [
+      { fr: 'Analytics', en: 'Analytics' },
+      { fr: 'SEO', en: 'SEO' },
+      { fr: 'CI/CD', en: 'CI/CD' },
+    ],
     skills: {
       fr: ['Évolution', 'Support', 'Croissance'],
       en: ['Evolution', 'Support', 'Growth'],
@@ -224,165 +269,181 @@ export const experiences: Experience[] = [
   },
 ];
 
+/** Réalisations aligned 1:1 with Nos expertises (same wording, real product screens). */
 export const projects: Project[] = [
   {
-    id: 'web-platform',
-    title: { fr: 'Plateformes web', en: 'Web platforms' },
-    category: { fr: 'Développement web', en: 'Web development' },
+    id: 'web',
+    title: { fr: 'Développement web', en: 'Web development' },
+    category: { fr: 'Site & plateforme', en: 'Website & platform' },
     description: {
-      fr: 'Sites vitrines, applications web et outils métiers adaptés aux besoins des entreprises marocaines.',
-      en: 'Showcase sites, web apps and business tools tailored to Moroccan companies.',
+      fr: 'Sites, plateformes et outils métiers conçus pour aller au-delà de la simple présence en ligne.',
+      en: 'Websites, platforms and business tools designed to go beyond a simple online presence.',
     },
-    tech: ['React', 'Angular', 'Spring Boot', 'API REST'],
-    color: 'blue',
-    image: 'https://images.unsplash.com/photo-1759884247173-3db27f7fafef?auto=format&fit=crop&w=800&q=82',
+    tech: ['Angular', 'React', 'Next.js', 'API REST'],
+    color: 'copper',
+    image: '/projects/assureflow/hero.webp',
     highlights: {
-      fr: ['Sites professionnels', 'Applications web', 'API & intégrations'],
-      en: ['Professional websites', 'Web applications', 'APIs & integrations'],
+      fr: ['Sites professionnels', 'Applications web', 'API & outils métiers'],
+      en: ['Professional websites', 'Web applications', 'APIs & business tools'],
     },
     details: {
       fr: [
         'Architecture claire, évolutive et maintenable',
         'Interfaces rapides, accessibles et responsives',
-        'Connexion aux outils métiers et APIs existants',
-        'Mise en production et suivi après livraison',
+        'Intégration API et outils métiers existants',
+        'Exemple : plateforme AssureFlow (souscription, offres, espace client)',
       ],
       en: [
         'Clear, scalable and maintainable architecture',
         'Fast, accessible and responsive interfaces',
-        'Integration with existing APIs and business tools',
-        'Launch support and post-delivery follow-up',
+        'Integration with APIs and existing business tools',
+        'Example: AssureFlow platform (subscription, offers, client area)',
       ],
     },
-    brandColor: '#422047',
+    brandColor: '#1a5b8e',
   },
   {
-    id: 'mobile-apps',
-    title: { fr: 'Applications mobiles', en: 'Mobile applications' },
-    category: { fr: 'Mobile', en: 'Mobile' },
+    id: 'mobile',
+    title: { fr: 'Applications mobiles', en: 'Mobile apps' },
+    category: { fr: 'Android & iOS', en: 'Android & iOS' },
     description: {
-      fr: 'Applications Android et iOS centrées sur l’expérience utilisateur et les usages terrain.',
-      en: 'Android and iOS apps focused on user experience and real-world usage.',
+      fr: 'Expériences Android et iOS intuitives, conçues pour les usages réels de vos utilisateurs.',
+      en: 'Intuitive Android and iOS experiences built for how your users actually work.',
     },
-    tech: ['Flutter', 'Firebase', 'Google Maps', 'UX'],
-    color: 'emerald',
-    image: 'https://images.unsplash.com/photo-1792955104634-fbc480c0a800?auto=format&fit=crop&w=800&q=82',
+    tech: ['Flutter', 'Firebase', 'Google Maps', 'UX mobile'],
+    color: 'warm',
+    image: '/projects/qarib/map.webp',
+    screens: [
+      '/projects/qarib/login.webp',
+      '/projects/qarib/map.webp',
+      '/projects/qarib/service.webp',
+      '/projects/qarib/orders.webp',
+      '/projects/qarib/notifications.webp',
+    ],
     highlights: {
       fr: ['Android & iOS', 'Multiplateforme', 'UX mobile'],
       en: ['Android & iOS', 'Cross-platform', 'Mobile UX'],
     },
     details: {
       fr: [
-        'Parcours pensés pour les usages réels du terrain',
+        'Parcours pensés pour les usages terrain',
         'Publication App Store et Play Store',
-        'Synchronisation et notifications en temps réel',
-        'Design mobile clair, fluide et durable',
+        'Synchronisation et notifications temps réel',
+        'Exemple : Qarib (carte, demandes, notifications)',
       ],
       en: [
-        'Journeys designed for real-world field usage',
+        'Journeys designed for real-world usage',
         'App Store and Play Store publishing',
         'Realtime sync and push notifications',
-        'Clear, fluid and lasting mobile design',
+        'Example: Qarib (map, requests, notifications)',
       ],
     },
-    brandColor: '#2bd44f',
+    brandColor: '#88482e',
   },
   {
-    id: 'digital-transform',
+    id: 'transformation',
     title: { fr: 'Transformation digitale', en: 'Digital transformation' },
     category: { fr: 'Conseil & outils', en: 'Consulting & tools' },
     description: {
-      fr: 'Automatisation, logiciels de gestion et workflows pour fluidifier le quotidien des équipes.',
-      en: 'Automation, management software and workflows to streamline team operations.',
+      fr: 'Moins de tâches répétitives, plus de fluidité grâce à des logiciels et processus adaptés.',
+      en: 'Fewer repetitive tasks and smoother workflows through tailored software and processes.',
     },
     tech: ['Automatisation', 'Cloud', 'Workflows', 'Dashboards'],
-    color: 'purple',
-    image: 'https://images.unsplash.com/photo-1758691736843-90f58dce465e?auto=format&fit=crop&w=800&q=82',
+    color: 'ink',
+    image: '/hero-proposition.png',
     highlights: {
-      fr: ['Automatisation', 'Outils métiers', 'Processus'],
-      en: ['Automation', 'Business tools', 'Processes'],
+      fr: ['Automatisation', 'Logiciels de gestion', 'Workflows'],
+      en: ['Automation', 'Management software', 'Workflows'],
     },
     details: {
       fr: [
-        'Cartographie des processus et des frictions',
-        'Outils sur mesure pour remplacer les tâches répétitives',
-        'Tableaux de bord pour piloter l’activité',
-        'Accompagnement des équipes à l’adoption',
+        'Diagnostic des process et des frictions',
+        'Automatisation des tâches à faible valeur',
+        'Outils de gestion adaptés à vos équipes',
+        'Accompagnement à l’adoption et au suivi',
       ],
       en: [
-        'Process and friction mapping',
-        'Custom tools that replace repetitive work',
-        'Dashboards to steer day-to-day operations',
-        'Team onboarding and adoption support',
+        'Process and friction diagnostics',
+        'Automation of low-value tasks',
+        'Management tools tailored to your teams',
+        'Adoption support and follow-up',
       ],
     },
-    brandColor: '#16b4df',
+    brandColor: '#5c534b',
   },
   {
     id: 'marketing',
     title: { fr: 'Marketing digital', en: 'Digital marketing' },
     category: { fr: 'Stratégie & contenus', en: 'Strategy & content' },
     description: {
-      fr: 'Stratégie, contenus, SEO et publicité pour renforcer la visibilité et la conversion.',
-      en: 'Strategy, content, SEO and ads to strengthen visibility and conversion.',
+      fr: 'Communication plus lisible, présence renforcée et actions guidées par les résultats.',
+      en: 'Clearer messaging, stronger presence and actions driven by measurable outcomes.',
     },
     tech: ['SEO', 'Contenus', 'Publicité', 'Analytics'],
-    color: 'blue',
-    image: 'https://images.unsplash.com/photo-1758873268998-2f77c2d38862?auto=format&fit=crop&w=800&q=82',
+    color: 'copper',
+    image: '/hero-collaboration.webp',
     highlights: {
-      fr: ['Stratégie', 'SEO', 'Campagnes digitales'],
-      en: ['Strategy', 'SEO', 'Digital campaigns'],
+      fr: ['Stratégie & contenus', 'SEO', 'Publicité digitale'],
+      en: ['Strategy & content', 'SEO', 'Digital ads'],
     },
     details: {
       fr: [
-        'Positionnement et messages clairs pour votre marque',
+        'Positionnement et messages plus clairs',
+        'Visibilité organique et campagnes ciblées',
+        'Suivi des performances et itérations',
         'Contenus utiles pour le web et les réseaux',
-        'SEO et campagnes pour attirer les bons prospects',
-        'Suivi des performances et itérations régulières',
       ],
       en: [
-        'Clear brand positioning and messaging',
+        'Clearer positioning and messaging',
+        'Organic visibility and targeted campaigns',
+        'Performance tracking and iteration',
         'Useful content for web and social channels',
-        'SEO and campaigns that attract the right prospects',
-        'Performance tracking and regular iteration',
       ],
     },
-    brandColor: '#E91E63',
+    brandColor: '#995733',
   },
   {
     id: 'ecommerce',
     title: { fr: 'E-commerce', en: 'E-commerce' },
     category: { fr: 'Boutiques en ligne', en: 'Online stores' },
     description: {
-      fr: 'De la vitrine à la commande : paiement, stocks et expérience d’achat optimisée.',
-      en: 'From storefront to checkout: payments, inventory and an optimized shopping experience.',
+      fr: 'Boutiques en ligne pensées pour simplifier la vente et améliorer l’expérience d’achat.',
+      en: 'Online stores built to simplify sales and improve the shopping experience.',
     },
-    tech: ['E-commerce', 'Paiement', 'Logistique', 'UX'],
-    color: 'emerald',
-    image: 'https://images.unsplash.com/photo-1769355104335-acef3aa4c9b6?auto=format&fit=crop&w=800&q=82',
+    tech: ['Flutter', 'Checkout', 'AR · 3D', 'Logistique'],
+    color: 'warm',
+    image: '/projects/arova/product.webp',
+    screens: [
+      '/projects/arova/login.webp',
+      '/projects/arova/catalog.webp',
+      '/projects/arova/product.webp',
+      '/projects/arova/cart.webp',
+      '/projects/arova/tracking.webp',
+      '/projects/arova/assistant.webp',
+    ],
     highlights: {
-      fr: ['Boutiques en ligne', 'Paiement sécurisé', 'Gestion des commandes'],
-      en: ['Online stores', 'Secure payments', 'Order management'],
+      fr: ['Boutiques en ligne', 'Paiement', 'Stocks & commandes'],
+      en: ['Online stores', 'Payments', 'Stock & orders'],
     },
     details: {
       fr: [
-        'Catalogue, panier et tunnel d’achat fluides',
-        'Paiement sécurisé et gestion des stocks',
-        'Suivi des commandes et notifications clients',
-        'Expérience mobile pensée pour convertir',
+        'Parcours d’achat fluide jusqu’au paiement',
+        'Gestion stocks, commandes et livraisons',
+        'Expérience mobile-first pour convertir',
+        'Exemple : AROVA (catalogue, panier, suivi)',
       ],
       en: [
-        'Smooth catalog, cart and checkout flow',
-        'Secure payments and inventory management',
-        'Order tracking and customer notifications',
-        'Mobile experience designed to convert',
+        'Smooth purchase flow through checkout',
+        'Stock, order and delivery management',
+        'Mobile-first experience built to convert',
+        'Example: AROVA (catalog, cart, tracking)',
       ],
     },
-    brandColor: '#422047',
+    brandColor: '#b8734d',
   },
 ];
 
-export const education: Education[] = [
+export const visionPrinciples: VisionPrinciple[] = [
   {
     institution: 'APP SYNERGY',
     degree: { fr: 'Sur mesure, vraiment', en: 'Truly custom' },

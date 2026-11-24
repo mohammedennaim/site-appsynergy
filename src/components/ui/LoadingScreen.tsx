@@ -25,11 +25,11 @@ const COPPER = '#b8734d';
 const COPPER_SOFT = '#cda06f';
 
 const techs = [
-  { name: 'Web', color: '#422047' },
-  { name: 'Mobile', color: '#2bd44f' },
-  { name: 'Marketing', color: '#E91E63' },
-  { name: 'E-commerce', color: '#16b4df' },
-  { name: 'Transformation', color: '#cda06f' },
+  { name: 'Web', color: '#88482e' },
+  { name: 'Mobile', color: '#b8734d' },
+  { name: 'Marketing', color: '#995733' },
+  { name: 'E-commerce', color: '#cda06f' },
+  { name: 'Transformation', color: '#5c534b' },
 ];
 
 const STEP_LIMITS = [35, 70, 99, 100];
