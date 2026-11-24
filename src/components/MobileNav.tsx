@@ -40,22 +40,22 @@ const MobileNav: FC = () => {
 
   const go = (href: string) => {
     setOpen(false);
-    // Let the menu start closing so the scroll target is measured without the scroll lock
     window.setTimeout(() => navigateTo(href), 50);
   };
 
   const activeItem = navItems.find((item) => item.href === `#${activeSection}`);
   const activeLabel = activeItem ? t.nav[activeItem.key] : '';
+  const solidBar = scrolled || open;
 
   return (
     <div className="md:hidden">
-      {/* Top bar */}
       <motion.header
         initial={{ y: -80 }}
         animate={{ y: hidden && !open ? -80 : 0 }}
         transition={{ duration: 0.35, ease: EASE }}
-        className={`fixed top-0 inset-x-0 z-[60] h-16 px-5 flex items-center justify-between transition-colors duration-300
-          ${scrolled || open ? 'bg-[#0b0d10]/95 border-b border-bw-border/[0.06]' : 'bg-transparent'}`}
+        className={`agency-mobile-bar fixed top-0 inset-x-0 z-[60] h-16 px-4 flex items-center justify-between gap-3 transition-[background,border-color,box-shadow] duration-300 ${
+          solidBar ? 'agency-mobile-bar--solid' : 'agency-mobile-bar--clear'
+        }`}
       >
         <button
           type="button"
@@ -64,12 +64,20 @@ const MobileNav: FC = () => {
             scrollToTarget(0);
           }}
           aria-label={t.nav.backHome}
-          className="group block"
+          className="group min-w-0 max-w-[62%] text-left"
         >
-          <Logo animated="mount" delay={700} className="w-11 h-11" />
+          <Logo
+            variant="signature"
+            tone="light"
+            framed
+            animated="mount"
+            delay={700}
+            decorative={false}
+            className="agency-mobile-logo"
+          />
         </button>
 
-        <div className="relative h-5 overflow-hidden text-xs font-semibold uppercase tracking-[0.2em] text-bw-text-secondary">
+        <div className="relative h-5 min-w-0 flex-1 overflow-hidden text-right text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--agency-ink)]/55">
           <AnimatePresence mode="wait" initial={false}>
             <motion.span
               key={open ? 'menu' : activeLabel}
@@ -77,14 +85,14 @@ const MobileNav: FC = () => {
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: '-100%', opacity: 0 }}
               transition={{ duration: 0.25, ease: EASE }}
-              className="block"
+              className="block truncate"
             >
               {open ? t.nav.menu : activeLabel}
             </motion.span>
           </AnimatePresence>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <LanguageSwitcher id="mobile-bar" />
           <button
             type="button"
@@ -92,23 +100,22 @@ const MobileNav: FC = () => {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
-            className="relative w-10 h-10 rounded-xl border border-bw-border bg-white/[0.04] grid place-items-center"
+            className="agency-mobile-toggle relative w-10 h-10 rounded-xl grid place-items-center"
           >
             <motion.span
               animate={open ? { rotate: 45, y: 0 } : { rotate: 0, y: -4 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="absolute w-4 h-[2px] rounded-full bg-bw-text-primary"
+              className="absolute w-4 h-[2px] rounded-full bg-[var(--agency-ink)]"
             />
             <motion.span
               animate={open ? { rotate: -45, y: 0 } : { rotate: 0, y: 4 }}
               transition={{ duration: 0.3, ease: EASE }}
-              className="absolute w-4 h-[2px] rounded-full bg-bw-text-primary"
+              className="absolute w-4 h-[2px] rounded-full bg-[var(--agency-ink)]"
             />
           </button>
         </div>
       </motion.header>
 
-      {/* Full-screen menu */}
       <AnimatePresence>
         {open && (
           <motion.nav
@@ -118,12 +125,15 @@ const MobileNav: FC = () => {
             animate={{ clipPath: 'inset(0 0 0% 0)' }}
             exit={{ clipPath: 'inset(0 0 100% 0)' }}
             transition={{ duration: 0.55, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[55] bg-bw-bg-primary/[0.98] flex flex-col pt-24 pb-8 px-6 overflow-y-auto"
+            className="agency-mobile-menu fixed inset-0 z-[55] flex flex-col pt-24 pb-8 px-6 overflow-y-auto"
           >
             <div
               aria-hidden="true"
               className="absolute inset-0 pointer-events-none"
-              style={{ background: 'radial-gradient(ellipse 80% 50% at 100% 0%, rgba(213,190,145,0.15) 0%, transparent 60%)' }}
+              style={{
+                background:
+                  'radial-gradient(ellipse 80% 50% at 100% 0%, rgba(184,115,77,0.14) 0%, transparent 60%)',
+              }}
             />
 
             <ul className="relative flex-1 flex flex-col justify-center gap-1">
@@ -146,16 +156,25 @@ const MobileNav: FC = () => {
                       aria-current={isActive ? 'true' : undefined}
                       className="group flex items-baseline gap-4 py-2.5"
                     >
-                      <span className={`font-mono text-xs w-6 ${isActive ? 'text-accent' : 'text-bw-text-primary/30'}`}>
+                      <span
+                        className={`font-mono text-xs w-6 ${
+                          isActive ? 'text-[#88482e]' : 'text-[var(--agency-ink)]/30'
+                        }`}
+                      >
                         {String(index).padStart(2, '0')}
                       </span>
                       <span
-                        className={`font-display font-black uppercase tracking-tight text-[2rem] leading-none transition-colors
-                          ${isActive ? 'text-accent' : 'text-bw-text-primary group-active:text-accent'}`}
+                        className={`font-display font-black uppercase tracking-tight text-[2rem] leading-none transition-colors ${
+                          isActive
+                            ? 'text-[#88482e]'
+                            : 'text-[var(--agency-ink)] group-active:text-[#88482e]'
+                        }`}
                       >
                         {t.nav[item.key]}
                       </span>
-                      {isActive && <span className="w-2 h-2 rounded-full bg-accent self-center" aria-hidden="true" />}
+                      {isActive && (
+                        <span className="w-2 h-2 rounded-full bg-[#88482e] self-center" aria-hidden="true" />
+                      )}
                     </a>
                   </motion.li>
                 );
@@ -167,13 +186,13 @@ const MobileNav: FC = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.1 } }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="relative pt-6 border-t border-bw-border space-y-4"
+              className="relative pt-6 border-t border-[#d7c8b9] space-y-4"
             >
               <a
                 href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-3 text-sm font-semibold text-bw-text-primary"
+                className="flex items-center gap-3 text-sm font-semibold text-[var(--agency-ink)]"
               >
-                <Mail className="w-4 h-4 text-accent" aria-hidden="true" />
+                <Mail className="w-4 h-4 text-[#88482e]" aria-hidden="true" />
                 {contactInfo.email}
               </a>
               <div className="flex flex-wrap gap-2">
@@ -183,10 +202,9 @@ const MobileNav: FC = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 h-11 px-4 rounded-full border border-bw-border bg-white/[0.04]
-                      text-sm font-semibold text-bw-text-secondary"
+                    className="inline-flex items-center gap-2 h-11 px-4 rounded-full border border-[#d7c8b9] bg-[#fffbf6] text-sm font-semibold text-[#5c534b]"
                   >
-                    <Icon className="w-4 h-4 text-accent" aria-hidden="true" />
+                    <Icon className="w-4 h-4 text-[#88482e]" aria-hidden="true" />
                     {label}
                     <ArrowUpRight className="w-3.5 h-3.5 opacity-50" aria-hidden="true" />
                   </a>

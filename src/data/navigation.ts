@@ -1,17 +1,29 @@
-import { Home, User, Code, Briefcase, Mail, GraduationCap, FolderGit2, Phone } from 'lucide-react';
+import {
+  Eye,
+  Home,
+  Layers,
+  LayoutGrid,
+  MessageCircle,
+  Phone,
+  Route,
+  Users,
+} from 'lucide-react';
 import { SiFacebook, SiInstagram, SiWhatsapp } from 'react-icons/si';
 import { FaLinkedinIn } from 'react-icons/fa6';
 import { contactInfo } from './portfolio';
 
-/** `key` points to the translated label in `ui.nav` */
+/**
+ * Sidebar / mobile nav — icons mirror each agency section’s role:
+ * Accueil · À propos · Expertises · Méthode · Réalisations · Vision · Contact
+ */
 export const navItems = [
   { icon: Home, key: 'home', href: '#accueil' },
-  { icon: User, key: 'about', href: '#apropos' },
-  { icon: Code, key: 'skills', href: '#competences' },
-  { icon: Briefcase, key: 'experience', href: '#experience' },
-  { icon: FolderGit2, key: 'projects', href: '#projets' },
-  { icon: GraduationCap, key: 'education', href: '#formation' },
-  { icon: Mail, key: 'contact', href: '#contact' },
+  { icon: Users, key: 'about', href: '#apropos' },
+  { icon: Layers, key: 'skills', href: '#competences' },
+  { icon: Route, key: 'experience', href: '#experience' },
+  { icon: LayoutGrid, key: 'projects', href: '#projets' },
+  { icon: Eye, key: 'education', href: '#formation' },
+  { icon: MessageCircle, key: 'contact', href: '#contact' },
 ] as const;
 
 const phoneDigits = contactInfo.phone.replace(/\D/g, '');

@@ -4,14 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="color-scheme" content="light only" />
     <meta name="supported-color-schemes" content="light" />
-    <link rel="icon" type="image/png" href="/brand/appsynergy-icon.png" />
-    <link rel="apple-touch-icon" href="/brand/appsynergy-logo.png" />
+    <!-- Favicon follows OS dark/light (Chrome ignores media= on icon links) -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=6" />
+    <script>
+      (function () {
+        var VERSION = '7';
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
+        function setIcon(id, href, sizes) {
+          var old = document.getElementById(id);
+          if (old) old.parentNode.removeChild(old);
+          var link = document.createElement('link');
+          link.id = id;
+          link.rel = 'icon';
+          link.type = 'image/png';
+          link.sizes = sizes;
+          link.href = href + '?v=' + VERSION + '&t=' + Date.now();
+          document.head.appendChild(link);
+        }
+        function applyFavicon() {
+          var dark = mq.matches;
+          setIcon('app-favicon', dark ? '/favicon-dark-32.png' : '/favicon-32.png', '32x32');
+          setIcon('app-favicon-192', dark ? '/icon-dark-192.png' : '/icon-192.png', '192x192');
+        }
+        applyFavicon();
+        try { mq.addEventListener('change', applyFavicon); }
+        catch (_) { mq.addListener(applyFavicon); }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#f4efe8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151d1a" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#f4efe8" />
     <meta name="description" content="APP SYNERGY accompagne les entreprises dans le développement web, mobile, e-commerce, marketing et transformation digitale, depuis le Maroc." />
     <meta name="author" content="APP SYNERGY" />
-    <title>APP SYNERGY — Une autre idée du digital</title>
+    <title>APP SYNERGY</title>
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />

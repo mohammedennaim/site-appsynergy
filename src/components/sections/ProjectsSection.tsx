@@ -1,7 +1,6 @@
 import { FC, useEffect, useRef, useState, type MutableRefObject } from 'react';
 import { AnimatePresence, motion, type MotionValue } from 'framer-motion';
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
-import { SiApple, SiGithub, SiGoogleplay } from 'react-icons/si';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { projects } from '../../data/portfolio';
 import { useScrollSteps } from '../../hooks/useScrollReveal';
 import { useFitHeight } from '../../hooks/useFitHeight';
@@ -56,14 +55,58 @@ const usePreloadProjectImages = () => {
   }, []);
 };
 
-const DemoIcon: FC<{ project: Project }> = ({ project }) =>
-  project.demo?.includes('play.google.com') ? (
-    <SiGoogleplay className="w-4 h-4" aria-hidden="true" />
-  ) : project.demo?.includes('github.com') ? (
-    <SiGithub className="w-4 h-4" aria-hidden="true" />
-  ) : (
-    <ExternalLink className="w-4 h-4" aria-hidden="true" />
+const ProjectDetails: FC<{
+  project: Project;
+  accentColor: string;
+  tone?: 'light' | 'dark';
+}> = ({ project, accentColor, tone = 'dark' }) => {
+  const { t, pick } = useI18n();
+  const highlights = project.highlights ? pick(project.highlights) : [];
+  const details = project.details ? pick(project.details) : [];
+
+  return (
+    <>
+      {highlights.length > 0 && (
+        <div className="project-highlights" data-tone={tone}>
+          {highlights.map((highlight) => (
+            <span key={highlight}>
+              <i style={{ background: accentColor }} />
+              {highlight}
+            </span>
+          ))}
+        </div>
+      )}
+
+      {details.length > 0 && (
+        <div className="project-details" data-tone={tone}>
+          <p className="project-details-label">{t.projects.details}</p>
+          <ul>
+            {details.map((item) => (
+              <li key={item}>
+                <i style={{ background: accentColor }} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="project-tech" data-tone={tone}>
+        <p className="project-details-label">{t.projects.stack}</p>
+        <div className="project-tech-list">
+          {project.tech.map((tech) => (
+            <TechBadge
+              key={tech}
+              name={tech}
+              iconClassName="w-3.5 h-3.5"
+              className="project-tech-badge"
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
+};
 
 const ProjectsSection: FC = () => {
   const { t, lang } = useI18n();
@@ -73,7 +116,7 @@ const ProjectsSection: FC = () => {
   const scrolling = useRef(false);
   const french = lang === 'fr';
   usePreloadProjectImages();
-  const expandedHeight = useFitHeight(84 + (projects.length - 1) * (ROW_COLLAPSED + 8) + 24, 430, 480);
+  const expandedHeight = useFitHeight(84 + (projects.length - 1) * (ROW_COLLAPSED + 8) + 24, 480, 560);
 
   useEffect(() => {
     let timer = 0;
@@ -253,70 +296,7 @@ const ExpandingPanel: FC<ExpandingPanelProps> = ({
             <h3>{title}</h3>
             <p>{pick(project.description)}</p>
 
-            {project.highlights && (
-              <div className="project-highlights">
-                {pick(project.highlights).slice(0, 3).map((highlight) => (
-                  <span key={highlight}>
-                    <i style={{ background: accentColor }} />
-                    {highlight}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            <div className="project-tech">
-              {project.tech.map((tech) => (
-                <TechBadge
-                  key={tech}
-                  name={tech}
-                  iconClassName="w-3.5 h-3.5"
-                  className="project-tech-badge"
-                />
-              ))}
-            </div>
-
-            <div className="project-links">
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="project-link project-link-primary"
-                  style={{ background: accentColor }}
-                >
-                  <SiGithub className="w-4 h-4" aria-hidden="true" />
-                  <span>{t.projects.code}</span>
-                </a>
-              )}
-
-              {project.demo && (
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className={`project-link ${project.github ? 'project-link-ghost' : 'project-link-primary'}`}
-                  style={project.github ? undefined : { background: accentColor }}
-                >
-                  <DemoIcon project={project} />
-                  <span>{project.demoLabel ? pick(project.demoLabel) : t.projects.demo}</span>
-                </a>
-              )}
-
-              {project.appStore && (
-                <a
-                  href={project.appStore}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="project-link project-link-ghost"
-                >
-                  <SiApple className="w-4 h-4" aria-hidden="true" />
-                  <span>App Store</span>
-                </a>
-              )}
-            </div>
+            <ProjectDetails project={project} accentColor={accentColor} tone="dark" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -336,7 +316,7 @@ const ProjectRow: FC<{
   onActivate: () => void;
   expandedHeight: number;
 }> = ({ project, index, isActive, position, onActivate, expandedHeight }) => {
-  const { t, pick } = useI18n();
+  const { pick } = useI18n();
   const accentColor = colorMap[project.color] || '#88482e';
   const number = String(index + 1).padStart(2, '0');
   const title = pick(project.title);
@@ -415,37 +395,7 @@ const ProjectRow: FC<{
               </div>
               <h3>{title}</h3>
               <p>{pick(project.description)}</p>
-              <div className="project-tech">
-                {project.tech.map((tech) => (
-                  <TechBadge key={tech} name={tech} iconClassName="w-3.5 h-3.5" className="project-tech-badge" />
-                ))}
-              </div>
-              <div className="project-links">
-                {project.github && (
-                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-link project-link-primary" style={{ background: accentColor }}>
-                    <SiGithub className="w-4 h-4" aria-hidden="true" />
-                    <span>{t.projects.code}</span>
-                  </a>
-                )}
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`project-link ${project.github ? 'project-link-ghost' : 'project-link-primary'}`}
-                    style={project.github ? undefined : { background: accentColor }}
-                  >
-                    <DemoIcon project={project} />
-                    <span>{project.demoLabel ? pick(project.demoLabel) : t.projects.demo}</span>
-                  </a>
-                )}
-                {project.appStore && (
-                  <a href={project.appStore} target="_blank" rel="noopener noreferrer" className="project-link project-link-ghost">
-                    <SiApple className="w-4 h-4" aria-hidden="true" />
-                    <span>App Store</span>
-                  </a>
-                )}
-              </div>
+              <ProjectDetails project={project} accentColor={accentColor} tone="light" />
             </div>
           </motion.div>
         )}

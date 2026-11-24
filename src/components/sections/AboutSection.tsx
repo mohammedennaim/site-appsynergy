@@ -10,7 +10,6 @@ import {
 } from 'framer-motion';
 import { ArrowUpRight, HeartHandshake, Layers, SlidersHorizontal } from 'lucide-react';
 import { profileImage } from '../../data/portfolio';
-import { useSectionRange } from '../../hooks/useScrollReveal';
 import { useSectionExitProgress } from '../../hooks/useSectionProgress';
 import { scrollToTarget } from '../../hooks/useSmoothScroll';
 import { useI18n } from '../../i18n/context';
@@ -18,17 +17,6 @@ import RichText from '../ui/RichText';
 import { AboutBackdrop } from '../ui/SectionBackdrops';
 
 const valueIcons = [SlidersHorizontal, Layers, HeartHandshake];
-
-/** Reading-progress ranges (pinned section) — finish before exit */
-const paragraphRanges = [
-  [0.22, 0.44],
-  [0.3, 0.52],
-] as const;
-const valueRanges = [
-  [0.42, 0.62],
-  [0.48, 0.68],
-  [0.54, 0.74],
-] as const;
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const contentEase = [0.22, 1, 0.36, 1] as const;
@@ -43,22 +31,26 @@ const wordVariants: Variants = {
 };
 
 interface AboutRevealProps {
-  range: readonly [number, number];
+  delay?: number;
   distance?: number;
   children: ReactNode;
   className?: string;
   as?: 'div' | 'li';
 }
 
-/** Cascade on section reading progress — same model as Contact */
-function AboutReveal({ range, distance = 22, children, className, as = 'div' }: AboutRevealProps) {
+/** Visible as soon as the section is on screen — works with sidebar jumps into the pin. */
+function AboutReveal({ delay = 0, distance = 22, children, className, as = 'div' }: AboutRevealProps) {
   const reduceMotion = useReducedMotionConfig();
-  const progress = useSectionRange(range[0], range[1]);
-  const y = useTransform(progress, [0, 1], [reduceMotion ? 0 : distance, 0]);
   const Tag = as === 'li' ? motion.li : motion.div;
 
   return (
-    <Tag className={className} style={{ opacity: progress, y }}>
+    <Tag
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: distance }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.55, delay, ease: EASE }}
+    >
       {children}
     </Tag>
   );
@@ -81,7 +73,7 @@ export default function AboutSection() {
   const still = useMotionValue(0);
   const photoScale = useTransform(exit ?? still, [0, 0.42], [1, 1.055], { ease: easeOut });
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const titleInView = useInView(titleRef, { once: true, amount: 0.45 });
+  const titleInView = useInView(titleRef, { once: true, amount: 0.35 });
 
   const titleWords = about.title.split(' ');
   const accentWords = about.accent.split(' ');
@@ -90,7 +82,7 @@ export default function AboutSection() {
     <section id="apropos" className="agency-about" aria-labelledby="agency-about-title">
       <AboutBackdrop />
       <header className="agency-about-header">
-        <AboutReveal range={[0.02, 0.2]} distance={10}>
+        <AboutReveal delay={0.02} distance={10}>
           <div className="agency-location">
             <img
               className="agency-about-wordmark"
@@ -114,7 +106,7 @@ export default function AboutSection() {
 
       <div className="agency-about-grid">
         <div className="agency-about-copy">
-          <AboutReveal range={[0.06, 0.28]}>
+          <AboutReveal delay={0.06}>
             <motion.h2
               ref={titleRef}
               id="agency-about-title"
@@ -137,13 +129,13 @@ export default function AboutSection() {
             </motion.h2>
           </AboutReveal>
 
-          <AboutReveal range={[0.14, 0.36]}>
+          <AboutReveal delay={0.12}>
             <p className="agency-about-lead">{about.description}</p>
           </AboutReveal>
 
           <div className="agency-about-story">
             {about.paragraphs.slice(0, 2).map((paragraph, index) => (
-              <AboutReveal key={paragraph} range={paragraphRanges[index]}>
+              <AboutReveal key={paragraph} delay={0.18 + index * 0.08}>
                 <p>
                   <RichText text={paragraph} strongClassName="font-semibold text-[var(--agency-ink)]" />
                 </p>
@@ -151,7 +143,7 @@ export default function AboutSection() {
             ))}
           </div>
 
-          <AboutReveal range={[0.36, 0.58]}>
+          <AboutReveal delay={0.34}>
             <motion.a
               className="agency-primary agency-about-cta"
               href="#contact"
@@ -170,12 +162,12 @@ export default function AboutSection() {
         </div>
 
         <div className="agency-about-visual">
-          <AboutReveal range={[0.1, 0.34]} distance={28}>
+          <AboutReveal delay={0.1} distance={28}>
             <motion.div
               className="agency-about-photo"
               initial={reduceMotion ? false : { clipPath: 'inset(10% 6% 10% 6% round 1.2rem)' }}
               whileInView={{ clipPath: 'inset(0% 0% 0% 0% round 1.2rem)' }}
-              viewport={{ once: true, amount: 0.35 }}
+              viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.95, ease: contentEase }}
             >
               <motion.img
@@ -193,7 +185,7 @@ export default function AboutSection() {
             </motion.div>
           </AboutReveal>
 
-          <AboutReveal range={[0.3, 0.52]}>
+          <AboutReveal delay={0.28}>
             <p className="agency-about-principle">
               <RichText text={about.paragraphs[2]} strongClassName="font-semibold text-[var(--agency-ink)]" />
             </p>
@@ -205,7 +197,7 @@ export default function AboutSection() {
         {about.languages.map((value, index) => {
           const Icon = valueIcons[index];
           return (
-            <AboutReveal key={value} as="li" range={valueRanges[index]} distance={12}>
+            <AboutReveal key={value} as="li" delay={0.22 + index * 0.07} distance={12}>
               <motion.span
                 className="agency-about-value"
                 whileHover={{ x: 4 }}

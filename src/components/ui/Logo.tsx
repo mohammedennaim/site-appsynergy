@@ -5,24 +5,20 @@ interface LogoProps {
   className?: string;
   variant?: 'mark' | 'signature';
   framed?: boolean;
-  /** Parent navigation controls already provide the accessible name. */
+  /** `light` on paper · `dark` on dark chrome */
+  tone?: 'light' | 'dark';
   decorative?: boolean;
-  /**
-   * Builds the monogram like the loading screen does: after `delay` ms once mounted,
-   * or once scrolled into view. Hovering replays it.
-   */
   animated?: 'mount' | 'inView';
   delay?: number;
 }
 
-/** Time the build needs before hovering may replay it */
 const REPLAY_AFTER = 1300;
 
-/** Official App Synergy identity, shared by every brand placement. */
 const Logo: FC<LogoProps> = ({
   className = '',
   variant = 'mark',
   framed = true,
+  tone = 'light',
   decorative = true,
   animated,
   delay = 0,
@@ -72,6 +68,7 @@ const Logo: FC<LogoProps> = ({
       aria-label={decorative ? undefined : 'APP SYNERGY'}
       aria-hidden={decorative ? true : undefined}
       onMouseEnter={animated ? replay : undefined}
+      data-tone={tone}
       className={`brand-logo ${variant === 'signature' ? 'brand-logo-signature' : ''} ${className}`}
     >
       <span className={`brand-logo-mark ${framed ? 'brand-logo-frame' : ''}`}>
@@ -80,14 +77,13 @@ const Logo: FC<LogoProps> = ({
             <image href="/brand/appsynergy-mark.png" x="12" y="12" width="88" height="88" preserveAspectRatio="xMidYMid meet" />
           </svg>
         ) : (
-          // The frame shows first, empty, and the mark assembles inside it
           play > 0 && <AnimatedMonogram key={play} className="block w-full h-full" />
         )}
       </span>
       {variant === 'signature' && (
         <span className="brand-logo-wordmark brand-logo-wordmark--appsynergy">
-          <span className="text-[#2bd44f]">App</span>
-          <span className="text-[#c9b8d4]">Synergy</span>
+          <span className="brand-logo-app">App</span>
+          <span className="brand-logo-synergy">Synergy</span>
         </span>
       )}
     </span>

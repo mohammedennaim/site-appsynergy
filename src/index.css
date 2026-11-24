@@ -360,27 +360,80 @@ body::-webkit-scrollbar,
     transition-duration: 0.01ms !important;
   }
 }
-/* Sculpted champagne monogram, with quiet framing at navigation sizes. */
+/* Brand mark + wordmark — tone=light on paper, tone=dark on dark chrome */
 .brand-logo { display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; flex-shrink: 0; min-width: 0; }
 .brand-logo-mark { position: relative; display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; aspect-ratio: 1; flex-shrink: 0; }
 .brand-logo-mark img { display: block; width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; object-position: center; }
 .brand-logo-frame {
   padding: 5px;
-  border: 1px solid rgba(213,190,145,0.18);
+  border: 1px solid #d9cec0;
   border-radius: 14px;
-  background: linear-gradient(145deg, rgba(213,190,145,0.07), rgba(11,13,16,0.5));
-  box-shadow: inset 0 1px 0 rgba(255,241,201,0.06);
+  background: #fffbf6;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
   transition: border-color 200ms ease, background-color 200ms ease;
 }
+.brand-logo[data-tone='dark'] .brand-logo-frame {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 241, 201, 0.08);
+}
 .group:hover .brand-logo-frame,
-.group:focus-visible .brand-logo-frame { border-color: rgba(213,190,145,0.65); background-color: rgba(213,190,145,0.06); }
-.brand-logo-signature { gap: 12px; }
+.group:focus-visible .brand-logo-frame { border-color: #b58e72; background: #fff; }
+.brand-logo-signature { gap: 10px; justify-content: flex-start; }
 .brand-logo-signature .brand-logo-mark { width: 38px; height: 38px; }
 .brand-logo-wordmark { display: flex; flex-direction: column; gap: 5px; text-align: left; text-transform: uppercase; line-height: 1; }
 .brand-logo-wordmark span:first-child { font-family: var(--font-display); font-size: 14px; font-weight: 700; letter-spacing: 0.025em; }
 .brand-logo-wordmark span:last-child { font-size: 10px; font-weight: 500; letter-spacing: 0.38em; }
-.brand-logo-wordmark--appsynergy span:first-child { font-size: 13px; letter-spacing: 0.02em; }
-.brand-logo-wordmark--appsynergy span:last-child { color: #c9b8d4; letter-spacing: 0.12em; }
+.brand-logo-wordmark--appsynergy {
+  flex-direction: row;
+  align-items: baseline;
+  gap: .32em;
+  min-width: 0;
+  white-space: nowrap;
+}
+.brand-logo-app {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #2bd44f;
+}
+.brand-logo-synergy {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #7a6a88;
+}
+.brand-logo[data-tone='dark'] .brand-logo-app { color: #3ae85a; }
+.brand-logo[data-tone='dark'] .brand-logo-synergy { color: #d7c6e4; }
+
+.agency-mobile-bar { color: var(--agency-ink); }
+.agency-mobile-bar--clear { background: transparent; border-bottom: 1px solid transparent; }
+.agency-mobile-bar--solid {
+  background: color-mix(in srgb, var(--agency-paper) 92%, white);
+  border-bottom: 1px solid #d7c8b9;
+  box-shadow: 0 10px 28px -22px rgba(55, 40, 28, .45);
+  backdrop-filter: blur(12px);
+}
+.agency-mobile-logo { width: auto; height: auto; max-width: 100%; }
+.agency-mobile-logo .brand-logo-mark { width: 34px; height: 34px; }
+.agency-mobile-logo .brand-logo-app,
+.agency-mobile-logo .brand-logo-synergy { font-size: 12px; }
+.agency-mobile-toggle {
+  border: 1px solid #d7c8b9;
+  background: #fffbf6;
+  color: var(--agency-ink);
+}
+.agency-mobile-menu {
+  background: color-mix(in srgb, var(--agency-paper) 96%, white);
+  color: var(--agency-ink);
+}
+.agency-mobile-bar .relative.inline-flex {
+  border-color: #d7c8b9;
+  background: #fffbf6;
+}
+.agency-mobile-bar .relative.inline-flex button { color: #7a6f64; }
+.agency-mobile-bar .relative.inline-flex button[aria-pressed='true'] { color: #fff; }
 
 /* Reference-led App Synergy landing composition. */
 .agency-hero { color:var(--agency-ink); background:var(--agency-paper); }
@@ -1096,12 +1149,44 @@ body::-webkit-scrollbar,
   width: .28rem;
   height: .28rem;
   border-radius: 50%;
+  flex-shrink: 0;
 }
-.project-tech {
+.project-details { margin-bottom: .9rem; }
+.project-details-label {
+  margin: 0 0 .45rem;
+  font-size: .66rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+}
+.project-details ul {
+  display: grid;
+  gap: .4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.project-details li {
+  display: flex;
+  align-items: flex-start;
+  gap: .55rem;
+  font-size: clamp(.82rem, .95vw, .92rem);
+  line-height: 1.4;
+  color: rgba(255,255,255,.82);
+}
+.project-details li i {
+  width: .28rem;
+  height: .28rem;
+  margin-top: .45em;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.project-tech { display: grid; gap: .45rem; }
+.project-tech-list {
   display: flex;
   flex-wrap: wrap;
   gap: .35rem;
-  margin-bottom: 1rem;
 }
 .project-tech-badge {
   padding: .32rem .62rem;
@@ -1111,28 +1196,6 @@ body::-webkit-scrollbar,
   font-size: .72rem;
   font-weight: 600;
   color: rgba(255,255,255,.88);
-}
-.project-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem;
-}
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  padding: .72rem 1.05rem;
-  border-radius: .85rem;
-  font-size: .72rem;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-}
-.project-link-primary { color: #fff; }
-.project-link-ghost {
-  border: 1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.08);
-  color: #fff;
 }
 .project-row {
   position: relative;
@@ -1220,21 +1283,19 @@ body::-webkit-scrollbar,
   color: #514b45;
   font-size: .9rem;
   line-height: 1.45;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .project-row-copy .project-category { color: #7a6f64; }
-.project-row-copy .project-tech-badge {
+.project-row-copy .project-details-label { color: #7a6f64; }
+.project-row-copy .project-highlights span {
   border-color: #ddd1c4;
   background: #f7f1e9;
   color: #3f3933;
 }
-.project-row-copy .project-link-ghost {
+.project-row-copy .project-details li { color: #3f3933; }
+.project-row-copy .project-tech-badge {
   border-color: #ddd1c4;
-  background: #fff;
-  color: var(--agency-ink);
+  background: #f7f1e9;
+  color: #3f3933;
 }
 .agency-projects button:focus-visible,
 .agency-projects a:focus-visible {

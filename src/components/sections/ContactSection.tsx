@@ -1,16 +1,16 @@
 import { FC, ReactNode, useEffect, useState, type ComponentType } from 'react';
-import { AnimatePresence, motion, useTransform } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotionConfig } from 'framer-motion';
 import { ArrowUpRight, Check, Clock, Copy, Mail, MapPin, Phone, Zap } from 'lucide-react';
 import { SiFacebook, SiInstagram, SiWhatsapp } from 'react-icons/si';
 import { FaLinkedinIn } from 'react-icons/fa6';
 import Logo from '../ui/Logo';
 import { contactInfo } from '../../data/portfolio';
 import { formatClock } from '../../utils/time';
-import { useSectionRange } from '../../hooks/useScrollReveal';
 import { useI18n } from '../../i18n/context';
 import { ContactBackdrop } from '../ui/SectionBackdrops';
 
 const phoneDigits = contactInfo.phone.replace(/\D/g, '');
+const EASE = [0.16, 1, 0.3, 1] as const;
 
 const socials: {
   label: string;
@@ -40,23 +40,25 @@ const useLocalTime = (timeZone: string) => {
 };
 
 const Cascade: FC<{
-  range: [number, number];
+  delay?: number;
   as?: 'div' | 'li';
   className?: string;
   children: ReactNode;
-}> = ({ range, as = 'div', className, children }) => {
-  const progress = useSectionRange(range[0], range[1]);
-  const y = useTransform(progress, [0, 1], [22, 0]);
+}> = ({ delay = 0, as = 'div', className, children }) => {
+  const reduceMotion = useReducedMotionConfig();
   const Tag = as === 'li' ? motion.li : motion.div;
   return (
-    <Tag style={{ opacity: progress, y }} className={className}>
+    <Tag
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.5, delay, ease: EASE }}
+    >
       {children}
     </Tag>
   );
 };
-
-const pillRange = (index: number): [number, number] => [0.14 + index * 0.05, 0.38 + index * 0.05];
-const infoRange = (index: number): [number, number] => [0.44 + index * 0.06, 0.64 + index * 0.06];
 
 const ContactSection: FC = () => {
   const { t, pick, lang } = useI18n();
@@ -64,6 +66,7 @@ const ContactSection: FC = () => {
   const [copied, setCopied] = useState(false);
   const localTime = useLocalTime('Africa/Casablanca');
   const french = lang === 'fr';
+  const reduceMotion = useReducedMotionConfig();
 
   const copyEmail = async () => {
     try {
@@ -79,29 +82,31 @@ const ContactSection: FC = () => {
     <section id="contact" className="agency-contact" aria-labelledby="contact-title">
       <ContactBackdrop />
       <header className="contact-header">
-        <div className="agency-location contact-brand">
-          <img
-            className="agency-about-wordmark"
-            src="/brand/appsynergy-icon.png"
-            alt="App Synergy"
-            width={1228}
-            height={272}
-          />
-          <i aria-hidden="true" />
-          <span>{french ? 'Contact' : 'Contact'}</span>
-        </div>
+        <Cascade delay={0.02}>
+          <div className="agency-location contact-brand">
+            <img
+              className="agency-about-wordmark"
+              src="/brand/appsynergy-icon.png"
+              alt="App Synergy"
+              width={1228}
+              height={272}
+            />
+            <i aria-hidden="true" />
+            <span>{french ? 'Contact' : 'Contact'}</span>
+          </div>
+        </Cascade>
       </header>
 
       <div className="contact-main">
-        <div className="contact-intro">
+        <Cascade delay={0.06} className="contact-intro">
           <p className="contact-eyebrow">{t.contact.eyebrow}</p>
           <h2 id="contact-title">
             {t.contact.title} <em>{t.contact.accent}</em>
           </h2>
           <p className="contact-lead">{t.contact.description}</p>
-        </div>
+        </Cascade>
 
-        <Cascade range={[0.02, 0.28]} className="contact-email">
+        <Cascade delay={0.12} className="contact-email">
           <div className="contact-email-shell">
             <a href={mailto} data-cursor={t.contact.cursor.write} className="contact-email-link">
               <span className="contact-email-icon" aria-hidden="true">
@@ -134,7 +139,7 @@ const ContactSection: FC = () => {
 
         <div className="contact-actions">
           {socials.map(({ label, href, icon: Icon, cursor, external }, index) => (
-            <Cascade key={label} range={pillRange(index)}>
+            <Cascade key={label} delay={0.16 + index * 0.05}>
               <a
                 href={href}
                 target={external ? '_blank' : undefined}
@@ -151,45 +156,41 @@ const ContactSection: FC = () => {
         </div>
 
         <ul className="contact-meta">
-          <Cascade as="li" range={infoRange(0)}>
+          <Cascade as="li" delay={0.38}>
             <MapPin size={16} aria-hidden="true" />
             <span>{pick(contactInfo.location)} · {t.contact.relocation}</span>
           </Cascade>
-          <Cascade as="li" range={infoRange(1)}>
+          <Cascade as="li" delay={0.44}>
             <Clock size={16} aria-hidden="true" />
             <span>
               <strong>{localTime}</strong> {t.contact.localTime}
             </span>
           </Cascade>
-          <Cascade as="li" range={infoRange(2)}>
+          <Cascade as="li" delay={0.5}>
             <Zap size={16} aria-hidden="true" />
             <span>{t.contact.response}</span>
           </Cascade>
         </ul>
       </div>
 
-      <footer className="contact-footer">
-        <Logo variant="signature" framed={false} decorative={false} animated="inView" delay={120} className="shrink-0" />
+      <Cascade delay={0.42} className="contact-footer">
+        <Logo variant="signature" tone="light" framed={false} decorative={false} animated="inView" delay={120} className="shrink-0" />
         <p>
           © {new Date().getFullYear()} <strong>APP SYNERGY</strong>. {t.contact.rights}
         </p>
-      </footer>
+      </Cascade>
 
-      <Signature />
+      <div aria-hidden="true" className="contact-signature">
+        <motion.p
+          initial={reduceMotion ? false : { opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: EASE }}
+        >
+          Synergy<span>.</span>
+        </motion.p>
+      </div>
     </section>
-  );
-};
-
-const Signature: FC = () => {
-  const progress = useSectionRange(0.28, 0.9);
-  const y = useTransform(progress, (p) => `${58 - 28 * p}%`);
-
-  return (
-    <div aria-hidden="true" className="contact-signature">
-      <motion.p style={{ y, opacity: progress }}>
-        Synergy<span>.</span>
-      </motion.p>
-    </div>
   );
 };
 

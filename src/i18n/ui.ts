@@ -1,6 +1,6 @@
 const fr = {
   meta: {
-    title: 'APP SYNERGY — Une autre idée du digital',
+    title: 'APP SYNERGY',
     description:
       'APP SYNERGY accompagne les entreprises dans le développement web, mobile, e-commerce, marketing et transformation digitale au Maroc.',
   },
@@ -11,9 +11,9 @@ const fr = {
   nav: {
     home: 'Accueil',
     about: 'À propos',
-    skills: 'Compétences',
-    experience: 'Approche',
-    projects: 'Projets',
+    skills: 'Expertises',
+    experience: 'Méthode',
+    projects: 'Réalisations',
     education: 'Vision',
     contact: 'Contact',
     backHome: "Retour à l'accueil",
@@ -144,6 +144,8 @@ const fr = {
     description:
       'Des réalisations concrètes — web, mobile, transformation, marketing et e-commerce — pour faire avancer vos ambitions digitales.',
     panelLabel: (title: string) => `Projet ${title}`,
+    details: 'Détails',
+    stack: 'Stack',
     code: 'Voir le code',
     demo: 'Voir la démo',
     screenAlt: (title: string, n: number) => `${title} — écran ${n}`,
@@ -214,7 +216,7 @@ export type UI = typeof fr;
 
 const en: UI = {
   meta: {
-    title: 'APP SYNERGY — A different take on digital',
+    title: 'APP SYNERGY',
     description:
       'APP SYNERGY helps businesses with web, mobile, e-commerce, marketing and digital transformation in Morocco.',
   },
@@ -225,8 +227,8 @@ const en: UI = {
   nav: {
     home: 'Home',
     about: 'About',
-    skills: 'Skills',
-    experience: 'Approach',
+    skills: 'Expertise',
+    experience: 'Method',
     projects: 'Work',
     education: 'Vision',
     contact: 'Contact',
@@ -358,6 +360,8 @@ const en: UI = {
     description:
       'Concrete work across web, mobile, transformation, marketing and e-commerce — built to move your digital ambitions forward.',
     panelLabel: (title: string) => `Project ${title}`,
+    details: 'Details',
+    stack: 'Stack',
     code: 'View code',
     demo: 'View demo',
     screenAlt: (title: string, n: number) => `${title} — screen ${n}`,

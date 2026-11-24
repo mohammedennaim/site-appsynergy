@@ -47,17 +47,15 @@ export interface Project {
   description: Localized;
   tech: string[];
   color: string;
-  /** Omitted when the source code is private */
-  github?: string;
-  demo?: string;
-  demoLabel?: Localized;
-  appStore?: string;
   image: string;
   /** Real app screenshots, shown in phone frames instead of the cover image */
   screens?: string[];
   /** Hex color of the app's own branding, used behind the screenshots */
   brandColor?: string;
+  /** Short chips shown on the expanded card */
   highlights?: Localized<string[]>;
+  /** Concrete deliverables listed in the card details panel */
+  details?: Localized<string[]>;
 }
 
 export interface Education {
