@@ -11,9 +11,7 @@ const fr = {
   nav: {
     home: 'Accueil',
     about: 'À propos',
-    skills: 'Expertises',
-    experience: 'Méthode',
-    projects: 'Réalisations',
+    projects: 'expertises',
     caseQarib: 'Qarib',
     caseArova: 'AROVA',
     vision: 'Vision',
@@ -36,7 +34,6 @@ const fr = {
     news: [
       'Agence digitale basée au Maroc',
       'Web, mobile & stratégie digitale',
-      'Six expertises complémentaires',
       'Le digital qui fait avancer',
     ],
     portraitAlt: 'Collaboration autour d’un projet digital',
@@ -73,9 +70,9 @@ const fr = {
   },
   projects: {
     title: 'Nos',
-    accent: 'univers.',
+    accent: 'expertises.',
     description:
-      'Des réalisations concrètes — web, mobile, transformation, marketing et e-commerce — pour faire avancer vos ambitions digitales.',
+      'Web, mobile, transformation digitale, marketing et e-commerce pour faire avancer vos projets.',
     panelLabel: (title: string) => `Projet ${title}`,
     details: 'Détails',
     stack: 'Stack',
@@ -136,7 +133,7 @@ const fr = {
     localTime: 'heure locale',
     response: 'Réponse sous 24 h',
     rights: 'Tous droits réservés.',
-    cursor: { write: 'Écrire', profile: 'Profil', code: 'Code', chat: 'Chat', call: 'Appeler' },
+    cursor: { write: 'Écrire', code: 'Code', chat: 'Chat', call: 'Appeler' },
   },
 };
 
@@ -155,9 +152,7 @@ const en: UI = {
   nav: {
     home: 'Home',
     about: 'About',
-    skills: 'Expertise',
-    experience: 'Method',
-    projects: 'Work',
+    projects: 'expertise',
     caseQarib: 'Qarib',
     caseArova: 'AROVA',
     vision: 'Vision',
@@ -180,7 +175,6 @@ const en: UI = {
     news: [
       'Digital agency based in Morocco',
       'Web, mobile & digital strategy',
-      'Six complementary expertise areas',
       'Digital that moves you forward',
     ],
     portraitAlt: 'Team collaborating on a digital project',
@@ -217,9 +211,9 @@ const en: UI = {
   },
   projects: {
     title: 'Our',
-    accent: 'focus areas.',
+    accent: 'expertise.',
     description:
-      'Concrete work across web, mobile, transformation, marketing and e-commerce — built to move your digital ambitions forward.',
+      'Web, mobile, digital transformation, marketing and e-commerce to move your projects forward.',
     panelLabel: (title: string) => `Project ${title}`,
     details: 'Details',
     stack: 'Stack',
@@ -280,7 +274,7 @@ const en: UI = {
     localTime: 'local time',
     response: 'Reply within 24 h',
     rights: 'All rights reserved.',
-    cursor: { write: 'Write', profile: 'Profile', code: 'Code', chat: 'Chat', call: 'Call' },
+    cursor: { write: 'Write', code: 'Code', chat: 'Chat', call: 'Call' },
   },
 };
 

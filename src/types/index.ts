@@ -4,12 +4,9 @@ export type Lang = 'fr' | 'en';
 export type Localized<T = string> = Record<Lang, T>;
 
 export interface ContactInfo {
-  email: string;
+  emails: string[];
   phone: string;
   location: Localized;
-  linkedin: string;
-  facebook: string;
-  instagram: string;
 }
 
 export interface Skill {

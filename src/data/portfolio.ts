@@ -1,12 +1,9 @@
 import { ContactInfo, Skill, Experience, Project, VisionPrinciple } from '../types';
 
 export const contactInfo: ContactInfo = {
-  email: 'contact@appsynergy.ma',
+  emails: ['appsynergyy@gmail.com'],
   phone: '+212 772 113 806',
   location: { fr: 'Maroc', en: 'Morocco' },
-  linkedin: 'https://www.linkedin.com/company/appsynergy',
-  facebook: 'https://www.facebook.com/appsynergy',
-  instagram: 'https://www.instagram.com/appsynergy',
 };
 
 export const profileImage = '/hero-collaboration.webp';
@@ -269,7 +266,6 @@ export const experiences: Experience[] = [
   },
 ];
 
-/** Réalisations aligned 1:1 with Nos expertises (same wording, real product screens). */
 export const projects: Project[] = [
   {
     id: 'web',

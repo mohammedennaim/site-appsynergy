@@ -1379,7 +1379,11 @@ body::-webkit-scrollbar,
   font-size: clamp(.98rem, 1.2vw, 1.1rem);
   line-height: 1.55;
 }
-.contact-email { width: min(100%, 40rem); }
+.contact-email {
+  display: grid;
+  gap: .55rem;
+  width: min(100%, 40rem);
+}
 .contact-email-shell {
   display: flex;
   align-items: center;

@@ -1,8 +1,7 @@
 import { FC, ReactNode, useEffect, useState, type ComponentType } from 'react';
 import { AnimatePresence, motion, useReducedMotionConfig } from 'framer-motion';
-import { ArrowUpRight, Check, Clock, Copy, Mail, MapPin, Phone, Zap } from 'lucide-react';
-import { SiFacebook, SiInstagram, SiWhatsapp } from 'react-icons/si';
-import { FaLinkedinIn } from 'react-icons/fa6';
+import { Check, Clock, Copy, Mail, MapPin, Phone, Zap } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 import Logo from '../ui/Logo';
 import { contactInfo } from '../../data/portfolio';
 import { formatClock } from '../../utils/time';
@@ -16,12 +15,9 @@ const socials: {
   label: string;
   href: string;
   icon: ComponentType<{ className?: string }>;
-  cursor: 'profile' | 'chat' | 'call';
+  cursor: 'chat' | 'call';
   external?: boolean;
 }[] = [
-  { label: 'LinkedIn', href: contactInfo.linkedin, icon: FaLinkedinIn, cursor: 'profile', external: true },
-  { label: 'Facebook', href: contactInfo.facebook, icon: SiFacebook, cursor: 'profile', external: true },
-  { label: 'Instagram', href: contactInfo.instagram, icon: SiInstagram, cursor: 'profile', external: true },
   { label: 'WhatsApp', href: `https://wa.me/${phoneDigits}`, icon: SiWhatsapp, cursor: 'chat', external: true },
   { label: contactInfo.phone, href: `tel:+${phoneDigits}`, icon: Phone, cursor: 'call' },
 ];
@@ -60,23 +56,58 @@ const Cascade: FC<{
   );
 };
 
-const ContactSection: FC = () => {
-  const { t, pick, lang } = useI18n();
-  const mailto = `mailto:${contactInfo.email}?subject=${encodeURIComponent(t.contact.mailSubject)}`;
+const ContactEmail: FC<{ email: string }> = ({ email }) => {
+  const { t } = useI18n();
+  const mailto = `mailto:${email}?subject=${encodeURIComponent(t.contact.mailSubject)}`;
   const [copied, setCopied] = useState(false);
-  const localTime = useLocalTime('Africa/Casablanca');
-  const french = lang === 'fr';
-  const reduceMotion = useReducedMotionConfig();
 
   const copyEmail = async () => {
     try {
-      await navigator.clipboard.writeText(contactInfo.email);
+      await navigator.clipboard.writeText(email);
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2000);
     } catch {
       window.location.href = mailto;
     }
   };
+
+  return (
+    <div className="contact-email-shell">
+      <a href={mailto} data-cursor={t.contact.cursor.write} className="contact-email-link">
+        <span className="contact-email-icon" aria-hidden="true">
+          <Mail size={20} />
+        </span>
+        <span className="contact-email-address">{email}</span>
+      </a>
+      <button
+        type="button"
+        onClick={copyEmail}
+        aria-label={`${copied ? t.contact.copiedLabel : t.contact.copyLabel} (${email})`}
+        className={`contact-copy${copied ? ' is-copied' : ''}`}
+      >
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={copied ? 'check' : 'copy'}
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+            className="contact-copy-inner"
+          >
+            {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
+            <span>{copied ? t.contact.copied : t.contact.copy}</span>
+          </motion.span>
+        </AnimatePresence>
+      </button>
+    </div>
+  );
+};
+
+const ContactSection: FC = () => {
+  const { t, pick, lang } = useI18n();
+  const localTime = useLocalTime('Africa/Casablanca');
+  const french = lang === 'fr';
+  const reduceMotion = useReducedMotionConfig();
 
   return (
     <section id="contact" className="agency-contact" aria-labelledby="contact-title">
@@ -107,34 +138,9 @@ const ContactSection: FC = () => {
         </Cascade>
 
         <Cascade delay={0.12} className="contact-email">
-          <div className="contact-email-shell">
-            <a href={mailto} data-cursor={t.contact.cursor.write} className="contact-email-link">
-              <span className="contact-email-icon" aria-hidden="true">
-                <Mail size={20} />
-              </span>
-              <span className="contact-email-address">{contactInfo.email}</span>
-            </a>
-            <button
-              type="button"
-              onClick={copyEmail}
-              aria-label={copied ? t.contact.copiedLabel : t.contact.copyLabel}
-              className={`contact-copy${copied ? ' is-copied' : ''}`}
-            >
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.span
-                  key={copied ? 'check' : 'copy'}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -6 }}
-                  transition={{ duration: 0.15 }}
-                  className="contact-copy-inner"
-                >
-                  {copied ? <Check size={16} aria-hidden="true" /> : <Copy size={16} aria-hidden="true" />}
-                  <span>{copied ? t.contact.copied : t.contact.copy}</span>
-                </motion.span>
-              </AnimatePresence>
-            </button>
-          </div>
+          {contactInfo.emails.map((email) => (
+            <ContactEmail key={email} email={email} />
+          ))}
         </Cascade>
 
         <div className="contact-actions">
@@ -149,7 +155,6 @@ const ContactSection: FC = () => {
               >
                 <Icon className="w-4 h-4" aria-hidden="true" />
                 <span>{label}</span>
-                {external && label !== 'WhatsApp' && <ArrowUpRight size={14} aria-hidden="true" />}
               </a>
             </Cascade>
           ))}

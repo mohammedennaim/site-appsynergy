@@ -155,12 +155,12 @@ function ServiceLink({ service, index, french, progress, enabled }: ServiceLinkP
     <motion.a
       variants={revealItem}
       style={enabled ? { y, opacity } : undefined}
-      href="#expertises"
+      href="#projets"
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 380, damping: 28 }}
       onClick={(event) => {
         event.preventDefault();
-        scrollToTarget('#expertises');
+        scrollToTarget('#projets');
       }}
     >
       <motion.span
@@ -349,7 +349,7 @@ export default function HeroSection({ introReady = true }: HeroSectionProps) {
               transition={{ type: 'spring', stiffness: 400, damping: 24 }}
               onClick={(e) => navigate(e, '#projets')}
             >
-              {fr ? 'Voir nos réalisations' : 'Explore our work'}
+              {fr ? 'Découvrir nos expertises' : 'Explore our expertise'}
               <ArrowRight size={21} />
             </motion.a>
             <motion.a

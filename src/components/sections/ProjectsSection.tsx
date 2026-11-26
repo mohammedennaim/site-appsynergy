@@ -162,8 +162,6 @@ const ProjectsSection: FC = () => {
             width={1228}
             height={272}
           />
-          <i aria-hidden="true" />
-          <span>{french ? 'Nos réalisations' : 'Our work'}</span>
         </div>
 
         <div className="projects-header-main">
@@ -178,7 +176,7 @@ const ProjectsSection: FC = () => {
               type="button"
               disabled={active === 0}
               onClick={() => activate(active - 1)}
-              aria-label={french ? 'Réalisation précédente' : 'Previous project'}
+              aria-label={french ? 'Univers précédent' : 'Previous focus area'}
             >
               <ArrowLeft size={19} />
             </button>
@@ -186,7 +184,7 @@ const ProjectsSection: FC = () => {
               type="button"
               disabled={active === projects.length - 1}
               onClick={() => activate(active + 1)}
-              aria-label={french ? 'Réalisation suivante' : 'Next project'}
+              aria-label={french ? 'Univers suivant' : 'Next focus area'}
             >
               <ArrowRight size={19} />
             </button>

@@ -188,13 +188,18 @@ const MobileNav: FC = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="relative pt-6 border-t border-[#d7c8b9] space-y-4"
             >
-              <a
-                href={`mailto:${contactInfo.email}`}
-                className="flex items-center gap-3 text-sm font-semibold text-[var(--agency-ink)]"
-              >
-                <Mail className="w-4 h-4 text-[#88482e]" aria-hidden="true" />
-                {contactInfo.email}
-              </a>
+              <div className="space-y-2">
+                {contactInfo.emails.map((email) => (
+                  <a
+                    key={email}
+                    href={`mailto:${email}`}
+                    className="flex items-center gap-3 text-sm font-semibold text-[var(--agency-ink)]"
+                  >
+                    <Mail className="w-4 h-4 text-[#88482e]" aria-hidden="true" />
+                    {email}
+                  </a>
+                ))}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {socialLinks.map(({ icon: Icon, label, href }) => (
                   <a

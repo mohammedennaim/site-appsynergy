@@ -2,8 +2,6 @@ import { FC, Suspense, lazy } from 'react';
 
 import HeroSection from './sections/HeroSection';
 import AboutSection from './sections/AboutSection';
-import SkillsSection from './sections/SkillsSection';
-import StagesSection from './sections/StagesSection';
 import ProjectsSection from './sections/ProjectsSection';
 import StackSection from './ui/StackSection';
 
@@ -22,12 +20,6 @@ const Portfolio: FC<PortfolioProps> = ({ introReady = true }) => (
     </StackSection>
     <StackSection id="apropos" dwellClassName="h-[55vh] lg:h-[60vh]">
       <AboutSection />
-    </StackSection>
-    <StackSection id="expertises" dwellClassName="h-[140vh] lg:h-[120vh]">
-      <SkillsSection />
-    </StackSection>
-    <StackSection id="experience" dwellClassName="h-[120vh] lg:h-[100vh]">
-      <StagesSection />
     </StackSection>
     <StackSection id="projets" dwellClassName="h-[160vh] lg:h-[120vh]">
       <ProjectsSection />
